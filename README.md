@@ -7,4 +7,4 @@ Parts of the code in this repository have been borrowed from the [Official DGL E
 This work was conducted as a joint effort with [Mohammad Javad Zohrabi](https://github.com/mjzohrabi) and [Saeed Saravani](https://github.com/SaeedSaravani) under the supervision of Dr. Mostafa Chehreghani at Amirkabir University of Technology.
 
 ###
-If you have any questions, encounter bugs, or have suggestions for improvements, please don't hesitate to contact us at (mjzohrabi@aut.ac.ir) or (s.saravani@aut.ac.ir.)
+If you have any questions, encounter bugs, or have suggestions for improvements, please don't hesitate to contact us at mjzohrabi@aut.ac.ir or s.saravani@aut.ac.ir.
