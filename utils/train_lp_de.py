@@ -2,10 +2,10 @@ import itertools
 import time
 from utils.utils import set_seed, set_device
 from extension.extend_lp import *
-from models.gat import GAT
-from models.gatv2 import GATv2
-from models.gcn import GCN
-from models.sage import GraphSAGE
+from models.gat_de import GAT
+from models.gatv2_de import GATv2
+from models.gcn_de import GCN
+from models.sage_de import GraphSAGE
 import scipy.sparse as sp
 from utils.dataset import load_dataset_link_prediction
 
@@ -29,27 +29,9 @@ def evaluate(scores, labels, threshold=0.5):
     return precision, recall, F1
 
 
-def main(seed, dataset_name, extend_metric, model_name, alpha, beta, gamma, explore, add_self_loop=True, verbose=False):
+def main_de(seed, dataset_name, extend_metric, model_name, alpha, beta, gamma, explore, add_self_loop=True, verbose=False):
     set_seed(seed)
     set_device()
-    
-    # dataset = load_dataset_link_prediction(dataset_name)
-    # g = dataset[0]
-
-    # # Split edge set for training and testing
-    # u, v = g.edges()
-
-    # eids = np.arange(g.number_of_edges())
-    # eids = np.random.permutation(eids)
-    # test_size = int(len(eids) * 0.2)
-    # train_size = g.number_of_edges() - test_size
-    # test_pos_u, test_pos_v = u[eids[:test_size]], v[eids[:test_size]]
-    # train_pos_u, train_pos_v = u[eids[test_size:]], v[eids[test_size:]]
-
-    # # Find all negative edges and split them for training and testing
-    # adj = sp.coo_matrix((np.ones(len(u)), (u.numpy(), v.numpy())))
-    # adj_neg = 1 - adj.todense() - np.eye(g.number_of_nodes())
-    # neg_u, neg_v = np.where(adj_neg != 0)
     
     dataset = load_dataset_link_prediction(dataset_name)
     g = dataset[0]
@@ -68,7 +50,6 @@ def main(seed, dataset_name, extend_metric, model_name, alpha, beta, gamma, expl
     adj = sp.coo_matrix((np.ones(len(u)), (u.numpy(), v.numpy())), shape=(g.number_of_nodes(), g.number_of_nodes()))
     adj_neg = 1 - adj.todense() - np.eye(g.number_of_nodes())
     neg_u, neg_v = np.where(adj_neg != 0)
-    
 
     neg_eids = np.random.choice(len(neg_u), g.number_of_edges())
     test_neg_u, test_neg_v = neg_u[neg_eids[:test_size]], neg_v[neg_eids[:test_size]]
