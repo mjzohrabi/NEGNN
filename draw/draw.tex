@@ -1,0 +1,46 @@
+\begin{figure}[t]
+    \centering
+    \begin{tikzpicture}
+        \pgfplotsset{
+            height=3.4cm, width=6.2cm,
+            ymin=63, ymax=97,
+            ytick={64,68,72,74,77,80,84,88,92,94,96},
+            xtick={0,1,2,3,4,5,6,7,8,23,24,25,26,27,28,29,30,31,96,97,98,99,100,101,102,103,104,1089,1090,1094,1098,1102,1106,1108},
+            xticklabels={,,1,2,3,4,5,6,7,,,,,24,25,26,27,28,29,30,,,,,97,98,99,100,101,102,103,104,,,,,1090,1094,1098,1102,1106,1108}
+        }
+        
+        \begin{groupplot}[
+            group style={
+                group name=myplot,
+                y descriptions at=edge right,
+                group size=2 by 5,
+                horizontal sep=0.3cm,
+                vertical sep=1.1cm
+            }
+        ]
+        
+        \foreach \i/\alphaval/\ylabel/\xmin/\xmax in {1/27/Cora/0/8, 2/1/Acc. \%/23/31, 3/10/Citeseer/0/8, 4/2/Acc. \%/6/14, 5/100/Pubmed/0/8, 6/6/Acc. \%/96/104, 7/400/Amz. Photos/0/8, 8/3/Acc. \%/389/407, 9/1100/Amz. Computers/0/8, 10/7/Acc. \%/1089/1108}
+        {
+            \nextgroupplot[
+                title={$\alpha$ = \alphaval},
+                ylabel=\ylabel,
+                xmin=\xmin, xmax=\xmax
+            ]
+            
+            \addplot[only marks, mark=*, mark options={color=black!90!white}]
+                coordinates {
+                    (1, 82.5) (2, 79.4) (3, 81.7) (4, 78.2) (5, 82.3) (6, 81.2) (7, 81)
+                };
+            
+            \addplot[color=gray]
+                coordinates {
+                    (0, 80.1) (8, 80.1)
+                };
+        }
+        
+        \coordinate (top) at (rel axis cs:0,1);
+        \coordinate (bot) at (rel axis cs:1,0);
+        
+        \end{groupplot}
+    \end{tikzpicture}
+\end{figure}
